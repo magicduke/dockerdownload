@@ -1,0 +1,21 @@
+name: export-python-image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull image
+        run: docker pull python:3.11-slim
+
+      - name: Save image
+        run: docker save -o python-3.11-slim.tar python:3.11-slim
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-3.11-slim
+          path: python-3.11-slim.tar
